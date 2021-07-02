@@ -1,3 +1,5 @@
+const L = require("lodash");
+
 const categories = [
   { id: "1", title: "Frameworks" },
   { id: "2", title: "Languages" },
@@ -74,8 +76,11 @@ const links = [
 const resolvers = {
   Query: {
     categories: () => categories,
+    category: (_, { id }) => L.find(categories, { id }),
     techs: () => techs,
+    tech: (_, { id }) => L.find(techs, { id }),
     links: () => links,
+    link: (_, { id }) => L.find(links, { id }),
   },
   Category: {
     techs: (parent) => techs.filter((tech) => tech.categoryId === parent.id),

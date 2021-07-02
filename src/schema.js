@@ -23,8 +23,11 @@ const typeDefs = gql`
 
   type Query {
     categories: [Category!]!
+    category(id: ID!): Category
     techs: [Tech!]!
+    tech(id: ID!): Tech
     links: [Link!]!
+    link(id: ID!): Link
   }
 `;
 

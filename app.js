@@ -4,9 +4,9 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
-const { ApolloServer, gql } = require("apollo-server-express");
-const { typeDefs } = require("./schema");
-const { resolvers } = require("./resolvers");
+const { ApolloServer } = require("apollo-server-express");
+const { typeDefs } = require("./src/schema");
+const { resolvers } = require("./src/resolvers");
 
 var indexRouter = require("./routes/index");
 
