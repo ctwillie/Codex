@@ -3,12 +3,27 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+const mongoose = require("mongoose");
+require("dotenv").config();
 
 const { ApolloServer } = require("apollo-server-express");
 const { typeDefs } = require("./src/schema");
 const { resolvers } = require("./src/resolvers");
 
 var indexRouter = require("./routes/index");
+
+mongoose.connect(
+  `mongodb://${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/${process.env.MONGO_DB}`,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+  }
+);
+mongoose.connection.once("open", () => {
+  console.log("connected to database");
+});
 
 const server = new ApolloServer({ typeDefs, resolvers });
 server.start();
